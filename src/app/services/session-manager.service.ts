@@ -97,7 +97,7 @@ export class SessionManagerService {
 					}
 					switch (data.status) {
 						case 'SESSION_NOT_FOUND':
-							this.notify.triggerNotify(8);
+							this.notify.triggerNotify(39);
 							resolve('ERROR');
 							break;
 						case 'SESSION_NEW':

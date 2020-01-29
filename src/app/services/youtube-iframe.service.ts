@@ -41,7 +41,8 @@ export class YoutubeIframeService {
 			autoplay: 0,
 			loop: 0,
 			modestbranding: 1,
-			rel: 0
+			rel: 0,
+			origin: `${window.location.protocol}//${window.location.host}`
 		};
 		const createPlayer = () => {
 			if (YTPlayer().Player) {

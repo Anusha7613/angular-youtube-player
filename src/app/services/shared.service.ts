@@ -259,6 +259,10 @@ export class SharedService {
 			}
 			case 'feedVideos': {
 				tempVideos.pop();
+				this.globals.feedVideos.push(...tempVideos);
+				break;
+			}
+			case 'categoryVideos': {
 				this.globals.feedVideos = tempVideos;
 				break;
 			}

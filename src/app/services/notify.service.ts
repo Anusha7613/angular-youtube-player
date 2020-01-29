@@ -22,12 +22,12 @@ export class NotifyService {
 		5: 'The playlist from the cloud was updated.',
 		6: 'The playlist from the cloud cannot be updated.',
 		7: 'Downloaded playlist from the cloud.',
-		8: 'The room does not exist so you could not get any info.',
 		10: 'Please check external settings.',
 		20: 'Copied',
 		21: 'Changed',
 		22: 'Settings has been saved',
 		23: 'Video Removed from the playlist',
+		24: 'The feed is loading.',
 		30: 'Someone joined in your room.',
 		31: 'Someone left your room.',
 		32: 'You joined in the room.',
@@ -36,15 +36,16 @@ export class NotifyService {
 		35: 'The chosen name is used.',
 		36: 'You left the name empty.',
 		37: 'The name has been changed.',
-		38: 'The name is empty or is used.'
+		38: 'The name is empty or is used.',
+		39: 'The room does not exist so you could not get any info.',
 	};
 
 	constructor() { }
 
-	triggerNotify(messageCode: number) {
+	triggerNotify(messageCode: number, timer: number = 3000) {
 		this.defaults.enabled = true;
 		this.defaults.message = this.copies[messageCode];
 		clearTimeout(this.timer);
-		this.timer = setTimeout(() => (this.defaults.enabled = false), 3000);
+		this.timer = setTimeout(() => (this.defaults.enabled = false), timer);
 	}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { YoutubeGetVideo } from '../../services/youtube.service';
 import { SharedService } from '../../services/shared.service';
 import { GlobalsService } from '../../services/globals.service';
+import { NotifyService } from '../../services/notify.service';
 
 @Component({
 	selector: 'app-category',
@@ -13,7 +14,8 @@ export class CategoryComponent implements OnInit {
 	constructor(
 		private youtube: YoutubeGetVideo,
 		private shared: SharedService,
-		public globals: GlobalsService
+		public globals: GlobalsService,
+		private notify: NotifyService
 	) { }
 
 	ngOnInit() {
@@ -28,6 +30,7 @@ export class CategoryComponent implements OnInit {
 
 	categoryChanged(event: Event) {
 		const category = event.target['value'];
+		this.notify.triggerNotify(24, 1000);
 		if (category !== 'all') {
 			this.globals.currentCategory = category;
 			this.getCategories();
@@ -61,14 +64,14 @@ export class CategoryComponent implements OnInit {
 	async getCategoriesVideos(val: string) {
 		this.globals.loadingState.feed = true;
 		const res2 = await this.youtube.feedVideos(val);
-		this.shared.convertVideoObject(res2['items'], 'feedVideos');
+		this.shared.convertVideoObject(res2['items'], 'categoryVideos');
 		this.globals.loadingState.feed = false;
 	}
 
 	resetCategories() {
 		this.globals.loadingState.feed = true;
 		this.globals.currentCategory = 'all';
-		this.globals.feedVideos = null;
+		this.globals.feedVideos = [];
 		this.shared.initFeed().then(() => {
 			this.globals.loadingState.feed = false;
 		});

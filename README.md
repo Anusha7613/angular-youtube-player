@@ -52,6 +52,10 @@ Check [angular documentation](https://angular.io/cli/build 'angular cli') for ot
 `ng build --prod=true`
 
 ## Changelog
+Angular YouTube Player 2.6.1
+- Bugfix
+- Added infinite loading for general feed
+
 Angular YouTube Player 2.6.0
 - List of guests in the session
 - Minor issues fixed (RC)
