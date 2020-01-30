@@ -51,6 +51,12 @@ export class PlayerComponent implements OnInit {
 			switch (data.eventName) {
 				case 'playVideo':
 					this.playerCTA.triggerPlayPauseVideo();
+					console.log(this.globals.currentState);
+					if (this.globals.isTempSessionActive) {
+						console.log("play pause local");
+					} else {
+						console.log("play pause host");
+					}
 					break;
 				case 'updateState':
 					this.changeState({ data: data.playerData.currentState });
@@ -63,11 +69,16 @@ export class PlayerComponent implements OnInit {
 					break;
 				case 'isBuffering':
 					// Need a solution when is buffering for one to keep in sync
-					// this.globals.player.pauseVideo();
-					// this.timeoutBuffering = setTimeout(() => {
-					// 	this.globals.player.playVideo();
-					// 	clearTimeout(this.timeoutBuffering);
-					// }, 500);
+					this.globals.player.pauseVideo();
+					if (this.globals.isTempSessionActive) {
+						console.log("buffering local");
+					} else {
+						console.log("buffering host");
+					}
+					this.timeoutBuffering = setTimeout(() => {
+						this.globals.player.playVideo();
+						clearTimeout(this.timeoutBuffering);
+					}, 500);
 					break;
 				default:
 			}

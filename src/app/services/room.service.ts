@@ -15,25 +15,25 @@ export class RoomService {
 		private shared: SharedService,
 		private notify: NotifyService,
 		private socket: Socket
-	) {}
+	) { }
 
 	join() {
 		this.session.getSession().then(res => {
 			if (res === 'OK') {
 				// If session exist we can bring him in the session
-				this.socket.emit('join_session', {session: this.globals.sessionValue, name: localStorage.getItem('clientName')}, ({client, status}) => {
+				this.socket.emit('join_session', { session: this.globals.sessionValue, name: localStorage.getItem('clientName') }, ({ client, status }) => {
 					switch (status) {
 						case 'USERNAME_EXIST':
-						console.log('you joined with used name');
-						break;
+							console.log('you joined with used name');
+							break;
 						case 'USERNAME_EMPTY':
-						this.shared.updateClientName(client.name);
-						break;
+							this.shared.updateClientName(client.name);
+							break;
 						case 'USERNAME_OK':
-						this.shared.updateClientName(client.name);
-						break;
+							this.shared.updateClientName(client.name);
+							break;
 						default:
-						break;
+							break;
 					}
 				});
 				this.shared.findPlaylistItem();

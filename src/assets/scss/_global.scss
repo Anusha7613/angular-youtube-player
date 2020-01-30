@@ -1,7 +1,6 @@
 * {
 	box-sizing: border-box;
 	-webkit-app-region: no-drag;
-	user-select: none;
 }
 
 body,
@@ -21,12 +20,10 @@ body {
 	line-height: 1.5;
 	margin: 0;
 	padding: 0;
-	-webkit-app-region: no-drag;
 }
 
 a,
 button {
-	-webkit-app-region: no-drag;
 	outline: 0;
 	cursor: pointer;
 }

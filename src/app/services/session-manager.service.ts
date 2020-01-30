@@ -8,7 +8,7 @@ export class SessionManagerService {
 	constructor(
 		public globals: GlobalsService,
 		private notify: NotifyService,
-		private socket: Socket
+		private socket: Socket,
 	) { }
 
 	checkSession() {
@@ -92,6 +92,8 @@ export class SessionManagerService {
 					const sessionData = data.session[this.globals.sessionValue];
 					if (typeof sessionData === 'object') {
 						this.globals.playlistVideos = sessionData.playlist;
+						// INIT CURRENT VIDEO FROM HOST
+						console.log(sessionData);
 						this.globals.loadingState.playlist = false;
 						this.notify.triggerNotify(7);
 					}
